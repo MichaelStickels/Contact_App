@@ -1,7 +1,9 @@
 package com.example.stickelsm3342.contact_app;
 
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -10,14 +12,15 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper{
 
-    public static final String DATABASE_NAME = "Constact.db";
-    public static final String TABLE_NAME = "contace_table";
+    public static final String DATABASE_NAME = "Contact.db";
+    public static final String TABLE_NAME = "contact_table";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "NAME";
+    public static final String COL_3 = "HOME";
+    public static final String COLR_4 = "MOBILE";
 
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, version);
-    }
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -31,4 +34,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         onCreate(db);
 
     }
+
+    public boolean insertData(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
+        return(result != -1);
+    }
+
 }
