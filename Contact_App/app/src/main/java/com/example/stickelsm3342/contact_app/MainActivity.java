@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
 
+        editName = (EditText) findViewById(R.id.editText_Name);
+
     }
 
 
