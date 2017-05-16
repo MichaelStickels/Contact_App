@@ -3,6 +3,7 @@ package com.example.stickelsm3342.contact_app;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -44,6 +45,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         return(result != -1);
+    }
+
+    public Cursor getAllData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cur = db.rawQuery("select * from " + TABLE_NAME, null);
+        return cur;
     }
 
 }
