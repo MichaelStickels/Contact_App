@@ -1,6 +1,5 @@
 package com.example.stickelsm3342.contact_app;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -55,5 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         Cursor cur = db.rawQuery("select * from " + TABLE_NAME, null);
         return cur;
     }
+
 
 }

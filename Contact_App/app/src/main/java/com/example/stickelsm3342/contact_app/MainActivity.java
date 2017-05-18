@@ -1,7 +1,9 @@
 package com.example.stickelsm3342.contact_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,11 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
     EditText editName, editMobile, editHome;
     Button submitData;
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuffer buffer = new StringBuffer();
 
-            for(int i = 1; i < res.getColumnCount(); i++) {
-                buffer.append(res.getString(i));
-            }
-            res.moveToNext();
+//            for(int i = 1; i < res.getColumnCount(); i++) {
+//                buffer.append(res.getString(i));
+//            }
+//            res.moveToNext();
 
         showMessage("Data", buffer.toString());
     }
@@ -80,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle(data);
         builder.setMessage(s);
         builder.show();
+
+    }
+
+    public void searchscreen(View v) {
+        Intent intent = new Intent(this, search.class).putExtra("database", (Parcelable) myDb);
+        startActivity(intent);
 
     }
 
