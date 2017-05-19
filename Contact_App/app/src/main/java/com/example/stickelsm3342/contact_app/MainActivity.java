@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
-    EditText editName, editMobile, editHome;
+    EditText editName, editMobile, editHome, editSearch;
     Button submitData;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         editName = (EditText) findViewById(R.id.editText_Name);
         editMobile = (EditText) findViewById(R.id.editText_Home);
         editHome = (EditText) findViewById((R.id.editText_Home));
+        editSearch = (EditText) findViewById(R.id.editText_search);
 
     }
 
@@ -70,10 +71,15 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuffer buffer = new StringBuffer();
 
-//            for(int i = 1; i < res.getColumnCount(); i++) {
-//                buffer.append(res.getString(i));
-//            }
-//            res.moveToNext();
+        res.moveToFirst();
+
+        for(int x = 0; x < res.getCount(); x++) {
+            for (int i = 0; i < res.getColumnCount(); i++) {
+                buffer.append(res.getString(i));
+                buffer.append("\n");
+            }
+            res.moveToNext();
+        }
 
         showMessage("Data", buffer.toString());
     }
@@ -89,9 +95,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchscreen(View v) {
-        Intent intent = new Intent(this, search.class).putExtra("database", (Parcelable) myDb);
+
+        Intent intent = new Intent(this, search.class).putExtra("results", myDb.Search(editSearch.getText().toString()));
         startActivity(intent);
 
     }
+
+
 
 }
