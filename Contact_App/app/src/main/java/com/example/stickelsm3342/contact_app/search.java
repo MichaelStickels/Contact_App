@@ -18,12 +18,14 @@ public class search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        Bundle results = getIntent().getExtras();
+
         Name = (TextView) findViewById(R.id.textView_Name);
-        Name.setText("test");
-        Mobile = (TextView) findViewById(R.id.textView_Name);
-        Mobile.setText("test");
-        Home = (TextView) findViewById(R.id.textView_Name);
-        Home.setText("test");
+        Name.setText(" " + results.getString("result1"));
+        Mobile = (TextView) findViewById(R.id.textView_Mobile);
+        Mobile.setText(" " + results.getString("result2"));
+        Home = (TextView) findViewById(R.id.textView_Home);
+        Home.setText(" " + results.getString("result3"));
 
     }
 

@@ -96,7 +96,28 @@ public class MainActivity extends AppCompatActivity {
 
     public void searchscreen(View v) {
 
-        Intent intent = new Intent(this, search.class).putExtra("results", myDb.Search(editSearch.getText().toString()));
+        String query = editSearch.getText().toString().toLowerCase();
+        String na = null, mo = null, ho = null;
+
+        Cursor curs = myDb.getAllData();
+        curs.moveToFirst();
+
+        while(true) {
+            if(curs.getString(0).toLowerCase().equals(query)) {
+                na = curs.getString(0);
+                mo = curs.getString(1);
+                ho = curs.getString(2);
+                break;
+            }
+
+            if(curs.isLast()) {
+                na = "Contact not found";
+                break;
+            }
+            curs.moveToNext();
+        }
+
+        Intent intent = new Intent(this, search.class).putExtra("result1", na).putExtra("result2", mo).putExtra("result3", ho);
         startActivity(intent);
 
     }

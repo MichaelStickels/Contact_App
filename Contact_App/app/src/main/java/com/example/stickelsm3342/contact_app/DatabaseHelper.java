@@ -55,14 +55,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return cur;
     }
 
-    public String Search(String query) {
-       String result = "";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cur = db.rawQuery("select * from " + TABLE_NAME, new String[]{query});
-        result = cur.getString(0) + "\n" + cur.getString(1) + "\n" + cur.getString(2);
-
-        return result;
-    }
 
 }
